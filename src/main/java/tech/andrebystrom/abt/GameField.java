@@ -2,16 +2,14 @@ package tech.andrebystrom.abt;
 
 import tech.andrebystrom.abt.tetras.Tetra;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class GameField
 {
     private final HashSet<Position> positions = new HashSet<>();
-    private final List<Tetra> tetras = new ArrayList<>(); // Tetras currently on the field.
+    private final List<Tetra> stoppedTetras = new ArrayList<>();
+
     private Tetra activeTetra;
     public static final int HEIGHT = 20;
     public static final int WIDTH = 10;
@@ -52,12 +50,10 @@ public class GameField
         {
             return false;
         }
-        var currentTetraPositions = tetras.stream()
-            .flatMap(p -> p.getPositions().stream())
-            .collect(Collectors.toSet());
+        var stoppedPositions = getStoppedPositions();
         for(var position : t.getPositions())
         {
-            if(currentTetraPositions.contains(position))
+            if(stoppedPositions.contains(position))
             {
                 return false;
             }
@@ -65,16 +61,38 @@ public class GameField
         return true;
     }
 
-    public PlayingFieldUpdateResult update()
+    public void update()
     {
-        // Go through the matrix and check if any rows are completed
+        //TODO:
+        // Check and remove the completed lines. Shift downward
+        // Check if game lost
+        // Check if tetra has reached stop pos, if so set it as stoppedTetra and remove the active tetra.
+    }
 
-        // Remove the lines that are completed and shift down.
+    private Set<Position> getStoppedPositions()
+    {
+        return stoppedTetras.stream()
+            .flatMap(t -> t.getPositions().stream())
+            .collect(Collectors.toSet());
+    }
 
-        // Check if we have lost, that is if the active tetra is standing on a tetra with a y-pos of HEIGHT - 1.
-
-        // Check if the active tetra has "landed", add it to the tetra list and set active tetra to null if that's
-        // the case.
-        return null;
+    private boolean isStopPosition(Tetra t)
+    {
+        var stoppedPositions = getStoppedPositions();
+        for(var position : t.getPositions())
+        {
+            for(var stoppedPosition : stoppedPositions)
+            {
+                if(position.y() - 1 == stoppedPosition.y() && position.x() == stoppedPosition.x())
+                {
+                    return true;
+                }
+                if(position.y() == 0)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
