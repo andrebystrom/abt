@@ -1,4 +1,4 @@
-package tech.andrebystrom.abt;
+package tech.andrebystrom.abt.shared;
 
 /**
  * Represents a position in 2D space.

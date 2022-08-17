@@ -1,7 +1,7 @@
-package tech.andrebystrom.abt.tetras;
+package tech.andrebystrom.abt.game.tetras;
 
-import tech.andrebystrom.abt.GameField;
-import tech.andrebystrom.abt.Position;
+import tech.andrebystrom.abt.game.GameField;
+import tech.andrebystrom.abt.shared.Position;
 
 import java.util.ArrayList;
 

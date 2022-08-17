@@ -1,6 +1,6 @@
-package tech.andrebystrom.abt.tetras;
+package tech.andrebystrom.abt.game.tetras;
 
-import tech.andrebystrom.abt.Position;
+import tech.andrebystrom.abt.shared.Position;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,7 +9,39 @@ import java.util.stream.Collectors;
 
 public abstract class Tetra
 {
+    private boolean isActive;
     private final List<Position> positions = new ArrayList<>();
+
+    /**
+     * Returns true if the tetra is active, false otherwise.
+     *
+     * @return true if the tetra is active, false otherwise.
+     */
+    public boolean isActive()
+    {
+        return isActive;
+    }
+
+    /**
+     * Set whether the tetra is active or not.
+     *
+     * @param active true if active, false otherwise.
+     */
+    public void setActive(boolean active)
+    {
+        isActive = active;
+    }
+
+
+    /**
+     * Checks if the tetra has any positions.
+     *
+     * @return true if it has any positions, false otherwise.
+     */
+    public final boolean hasAnyPositions()
+    {
+        return !positions.isEmpty();
+    }
 
     /**
      * Get the positions of this tetra. Each position represents the upper left corner for each of the four blocks that
@@ -17,21 +49,21 @@ public abstract class Tetra
      *
      * @return the positions.
      */
-    public Collection<Position> getPositions()
+    public final Collection<Position> getPositions()
     {
-        return List.copyOf(positions);
+        return new ArrayList<>(positions);
     }
 
     /**
-     * Set the positions of the tetra. This has to be four connected positions.
+     * Set the positions of the tetra. This has to be at most four connected positions.
      *
      * @param positions the positions.
      */
-    public void setPositions(Collection<? extends Position> positions)
+    public final void setPositions(Collection<? extends Position> positions)
     {
-        if(positions.size() != 4)
+        if(positions.size() > 4)
         {
-            throw new IllegalArgumentException("Tetra has to have four positions");
+            throw new IllegalArgumentException("Tetra cannot have more than four positions");
         }
         for(var position : positions)
         {
@@ -101,6 +133,16 @@ public abstract class Tetra
             .map(p -> new Position(p.x(), p.y() + 1))
             .collect(Collectors.toList());
         setPositions(newPositions);
+    }
+
+    /**
+     * Removes all positions at the given Y coordinate.
+     *
+     * @param y the Y coordinate.
+     */
+    public void removePositionsAtY(int y)
+    {
+        positions.removeIf(p -> p.y() == y);
     }
 
     /**
