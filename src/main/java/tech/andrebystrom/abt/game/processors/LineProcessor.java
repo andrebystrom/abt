@@ -1,6 +1,6 @@
 package tech.andrebystrom.abt.game.processors;
 
-import tech.andrebystrom.abt.game.GameContext;
+import tech.andrebystrom.abt.game.GameUpdateContext;
 import tech.andrebystrom.abt.game.GameField;
 import tech.andrebystrom.abt.game.tetras.Tetra;
 import tech.andrebystrom.abt.shared.Position;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class LineProcessor implements Processor
 {
     @Override
-    public void process(GameContext context)
+    public void process(GameUpdateContext context)
     {
         var completedLines = new ArrayList<Integer>();
         var positions = context.getTetras()

@@ -1,6 +1,6 @@
 package tech.andrebystrom.abt.game.processors;
 
-import tech.andrebystrom.abt.game.GameContext;
+import tech.andrebystrom.abt.game.GameUpdateContext;
 import tech.andrebystrom.abt.game.GameField;
 import tech.andrebystrom.abt.game.Input;
 import tech.andrebystrom.abt.game.tetras.Tetra;
@@ -12,7 +12,7 @@ public class MovementProcessor implements Processor
     private int timesSinceLastMove = 0;
 
     @Override
-    public void process(GameContext context)
+    public void process(GameUpdateContext context)
     {
         var field = context.getGameField();
         var input = context.getInput();

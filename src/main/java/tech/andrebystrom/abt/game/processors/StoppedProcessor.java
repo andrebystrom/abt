@@ -1,6 +1,6 @@
 package tech.andrebystrom.abt.game.processors;
 
-import tech.andrebystrom.abt.game.GameContext;
+import tech.andrebystrom.abt.game.GameUpdateContext;
 import tech.andrebystrom.abt.game.tetras.Tetra;
 import tech.andrebystrom.abt.shared.Position;
 
@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class StoppedProcessor implements Processor
 {
     @Override
-    public void process(GameContext context)
+    public void process(GameUpdateContext context)
     {
         context.getTetras()
             .stream()

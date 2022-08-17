@@ -4,14 +4,14 @@ import tech.andrebystrom.abt.game.tetras.Tetra;
 
 import java.util.ArrayList;
 import java.util.List;
-public class GameContext
+public class GameUpdateContext
 {
     private List<Tetra> tetras;
     private GameField gameField;
     private Input input;
     private ArrayList<Integer> completedLines;
 
-    public GameContext(List<Tetra> tetras, GameField gameField, Input input)
+    public GameUpdateContext(List<Tetra> tetras, GameField gameField, Input input)
     {
         this.tetras = tetras;
         this.gameField = gameField;

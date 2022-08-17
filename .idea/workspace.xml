@@ -5,15 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0efc792d-fc81-4ee2-ab00-43af07d1ac67" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/GameField.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/Abt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/Abt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/GameField.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/PlayingFieldUpdateResult.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/shared/Position.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/tetras/BoxTetra.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/tetras/BoxTetra.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/tetras/Tetra.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/tetras/Tetra.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/controllers/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/controllers/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/GameContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/GameUpdateContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/processors/LineProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/processors/LineProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/processors/MovementProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/processors/MovementProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/processors/Processor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/processors/Processor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/processors/StoppedProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/processors/StoppedProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/views/GameFieldView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/views/GameFieldView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/views/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/views/MainWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +87,7 @@
       <updated>1660641429632</updated>
       <workItem from="1660641432058" duration="11736000" />
       <workItem from="1660722412011" duration="16693000" />
+      <workItem from="1660757229134" duration="3814000" />
     </task>
     <servers />
   </component>

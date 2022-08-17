@@ -1,11 +1,14 @@
 package tech.andrebystrom.abt.views;
 
+import tech.andrebystrom.abt.game.GameState;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class MainWindow extends JFrame
 {
     private GameFieldView gameFieldView;
+
     public MainWindow()
     {
         super("ABT");
@@ -16,5 +19,11 @@ public class MainWindow extends JFrame
 
         gameFieldView = new GameFieldView();
         add(gameFieldView);
+    }
+
+    public void render(GameState state)
+    {
+        gameFieldView.setState(state);
+        repaint();
     }
 }
