@@ -95,7 +95,7 @@ public class GameField
     {
         return activeTetra.getPositions()
             .stream()
-            .anyMatch(p -> p.y() == 0)
-            && isStopPos(activeTetra, tetras);
+            .anyMatch(p -> p.y() == 0 || p.y() == 1)
+            && !isValidPos(activeTetra, tetras.stream().filter(t -> !t.isActive()).toList());
     }
 }

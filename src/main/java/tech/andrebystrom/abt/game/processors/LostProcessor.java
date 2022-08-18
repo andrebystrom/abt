@@ -1,22 +1,21 @@
 package tech.andrebystrom.abt.game.processors;
 
 import tech.andrebystrom.abt.game.GameUpdateContext;
+import tech.andrebystrom.abt.shared.Position;
+
+import java.util.HashSet;
 
 public class LostProcessor implements Processor
 {
     @Override
     public void process(GameUpdateContext context)
     {
+        var tmp = new HashSet<Position>();
         context.getTetras()
             .stream()
-            .filter(t -> t.isActive())
+            .flatMap(t -> t.getPositions().stream())
+            .filter(p -> !tmp.add(p))
             .findFirst()
-            .ifPresent(t ->
-            {
-                if(context.getGameField().isLost(t, context.getTetras()))
-                {
-                    context.setLost(true);
-                }
-            });
+            .ifPresent(p -> context.setLost(true));
     }
 }

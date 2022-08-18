@@ -37,4 +37,12 @@ public class MainWindow extends JFrame
         gameFieldView.setState(state);
         gameFieldView.repaint();
     }
+
+    public void renderLost(GameState state)
+    {
+        container.removeAll();
+        container.add(new LostView());
+        revalidate();
+        repaint();
+    }
 }

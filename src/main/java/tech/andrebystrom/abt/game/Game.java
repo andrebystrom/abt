@@ -15,6 +15,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class Game
 {
     private State state = State.NOT_STARTED;
+    private boolean restartRequested;
     private int points;
     private int completedLinesCount;
     private List<Tetra> tetras;
@@ -68,6 +69,14 @@ public class Game
                 case RUNNING -> runIteration();
                 case LOST ->
                 {
+                    synchronized(this)
+                    {
+                        if(restartRequested)
+                        {
+                            resetFields();
+                            state = State.RUNNING;
+                        }
+                    }
                 }
             }
 
@@ -98,10 +107,24 @@ public class Game
         }
         completedLinesCount += context.getCompletedLines().size();
         points += completedLinesCount * 100;
+        if(context.isLost())
+        {
+            synchronized(this)
+            {
+                state = State.LOST;
+            }
+        }
         var state = new GameState(tetras, context.getCompletedLines(), points, completedLinesCount);
         try
         {
-            SwingUtilities.invokeAndWait(() -> window.render(state));
+            if(context.isLost())
+            {
+                SwingUtilities.invokeAndWait(() -> window.renderLost(state));
+            }
+            else
+            {
+                SwingUtilities.invokeAndWait(() -> window.render(state));
+            }
         }
         catch(Exception e)
         {
@@ -148,7 +171,10 @@ public class Game
                 {
                     if(e.getKeyCode() == KeyEvent.VK_SPACE)
                     {
-
+                        synchronized(Game.this)
+                        {
+                            restartRequested = true;
+                        }
                     }
                 }
                 case RUNNING ->
