@@ -30,7 +30,7 @@ public class GameFieldView extends JPanel
                 g.setColor(getColor(tetra.getClass()));
                 for(var pos : tetra.getPositions())
                 {
-                    g.fillRect(pos.x(), pos.y(), 15, 15);
+                    g.fillRect(15 * pos.x(), 15 * pos.y(), 15, 15);
                 }
             }
         }

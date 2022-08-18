@@ -13,8 +13,8 @@ public class BoxTetra extends Tetra
         int middle = GameField.WIDTH / 2;
         for(int i = middle; i < middle + 2; i++)
         {
-            positions.add(new Position(i, GameField.HEIGHT));
-            positions.add(new Position(i, GameField.HEIGHT + 1));
+            positions.add(new Position(i, 0));
+            positions.add(new Position(i, 1));
         }
         setPositions(positions);
     }

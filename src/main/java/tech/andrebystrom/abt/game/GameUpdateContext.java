@@ -1,6 +1,7 @@
 package tech.andrebystrom.abt.game;
 
 import tech.andrebystrom.abt.game.tetras.Tetra;
+import tech.andrebystrom.abt.game.tetras.TetraFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +12,14 @@ public class GameUpdateContext
     private Input input;
     private ArrayList<Integer> completedLines;
 
-    public GameUpdateContext(List<Tetra> tetras, GameField gameField, Input input)
+    private final TetraFactory tetraFactory;
+
+    public GameUpdateContext(List<Tetra> tetras, GameField gameField, Input input, TetraFactory factory)
     {
         this.tetras = tetras;
         this.gameField = gameField;
         this.input = input;
+        this.tetraFactory = factory;
         completedLines = new ArrayList<>();
     }
 
@@ -37,6 +41,11 @@ public class GameUpdateContext
     public ArrayList<Integer> getCompletedLines()
     {
         return completedLines;
+    }
+
+    public TetraFactory getTetraFactory()
+    {
+        return tetraFactory;
     }
 
     public void setTetras(List<Tetra> tetras)

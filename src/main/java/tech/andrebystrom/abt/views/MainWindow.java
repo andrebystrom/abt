@@ -24,6 +24,7 @@ public class MainWindow extends JFrame
     public void render(GameState state)
     {
         gameFieldView.setState(state);
-        repaint();
+
+        gameFieldView.repaint();
     }
 }

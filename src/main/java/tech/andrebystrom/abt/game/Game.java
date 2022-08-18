@@ -8,6 +8,7 @@ import tech.andrebystrom.abt.views.MainWindow;
 
 import javax.swing.*;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Semaphore;
@@ -35,11 +36,14 @@ public class Game
     public Game(MainWindow window)
     {
         processors = List.of(
+            new SpawnProcessor(),
             new MovementProcessor(),
             new StoppedProcessor(),
             new LineProcessor(),
             new StaleTetraProcessor());
         this.window = window;
+        tetras = new ArrayList<>();
+        gameField = new GameField();
     }
 
     public synchronized void start()
@@ -96,7 +100,11 @@ public class Game
                 var endTime = System.currentTimeMillis();
                 try
                 {
-                    Thread.sleep(msPerFrame - (endTime - startTime));
+                    var sleepTime = msPerFrame - (endTime - startTime);
+                    if(sleepTime >= 0)
+                    {
+                        Thread.sleep(sleepTime);
+                    }
                 }
                 catch(InterruptedException e)
                 {
@@ -114,7 +122,7 @@ public class Game
     {
         var input = inputQueue.poll();
         inputQueue.clear();
-        var context = new GameUpdateContext(tetras, gameField, input == null ? Input.NONE : input);
+        var context = new GameUpdateContext(tetras, gameField, input == null ? Input.NONE : input, tetraFactory);
         for(var processor : processors)
         {
             processor.process(context);

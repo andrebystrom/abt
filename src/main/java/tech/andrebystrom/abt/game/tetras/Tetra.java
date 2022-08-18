@@ -119,7 +119,7 @@ public abstract class Tetra
     public void moveDown()
     {
         var newPositions = positions.stream()
-            .map(p -> new Position(p.x(), p.y() - 1))
+            .map(p -> new Position(p.x(), p.y() + 1))
             .collect(Collectors.toList());
         setPositions(newPositions);
     }
@@ -130,7 +130,7 @@ public abstract class Tetra
     public void moveUp()
     {
         var newPositions = positions.stream()
-            .map(p -> new Position(p.x(), p.y() + 1))
+            .map(p -> new Position(p.x(), p.y() - 1))
             .collect(Collectors.toList());
         setPositions(newPositions);
     }

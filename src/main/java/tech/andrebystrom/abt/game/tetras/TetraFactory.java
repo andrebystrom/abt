@@ -38,7 +38,9 @@ public class TetraFactory
     {
         try
         {
-            return tetraClass.getConstructor().newInstance();
+            var tetra = tetraClass.getConstructor().newInstance();
+            tetra.setActive(true);
+            return tetra;
         }
         catch(Exception e)
         {

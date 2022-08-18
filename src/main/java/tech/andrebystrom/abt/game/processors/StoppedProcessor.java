@@ -1,5 +1,6 @@
 package tech.andrebystrom.abt.game.processors;
 
+import tech.andrebystrom.abt.game.GameField;
 import tech.andrebystrom.abt.game.GameUpdateContext;
 import tech.andrebystrom.abt.game.tetras.Tetra;
 import tech.andrebystrom.abt.shared.Position;
@@ -24,8 +25,8 @@ public class StoppedProcessor implements Processor
                     .collect(Collectors.toSet());
                 for(var pos : t.getPositions())
                 {
-                    if(!stoppedPositions.contains(new Position(pos.y() - 1, pos.x()))
-                    && t.getPositions().stream().noneMatch(p -> p.y() == 0))
+                    if(!stoppedPositions.contains(new Position(pos.x(), pos.y() + 1))
+                    && pos.y() < GameField.HEIGHT - 1)
                     {
                         continue;
                     }
