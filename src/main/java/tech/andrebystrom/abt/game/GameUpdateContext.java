@@ -11,6 +11,7 @@ public class GameUpdateContext
     private GameField gameField;
     private Input input;
     private ArrayList<Integer> completedLines;
+    private boolean isLost;
 
     private final TetraFactory tetraFactory;
 
@@ -43,6 +44,11 @@ public class GameUpdateContext
         return completedLines;
     }
 
+    public boolean isLost()
+    {
+        return isLost;
+    }
+
     public TetraFactory getTetraFactory()
     {
         return tetraFactory;
@@ -66,5 +72,10 @@ public class GameUpdateContext
     public void setCompletedLines(ArrayList<Integer> completedLines)
     {
         this.completedLines = completedLines;
+    }
+
+    public void setLost(boolean lost)
+    {
+        isLost = lost;
     }
 }

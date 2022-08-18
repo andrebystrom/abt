@@ -12,6 +12,5 @@ public class Abt
         var window = new MainWindow();
         var game = new Game(window);
         SwingUtilities.invokeLater(() -> window.setVisible(true));
-        game.start();
     }
 }

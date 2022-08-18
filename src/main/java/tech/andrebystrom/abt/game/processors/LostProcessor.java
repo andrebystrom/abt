@@ -1,22 +1,21 @@
 package tech.andrebystrom.abt.game.processors;
 
 import tech.andrebystrom.abt.game.GameUpdateContext;
-import tech.andrebystrom.abt.game.tetras.Tetra;
 
-public class StoppedProcessor implements Processor
+public class LostProcessor implements Processor
 {
     @Override
     public void process(GameUpdateContext context)
     {
         context.getTetras()
             .stream()
-            .filter(Tetra::isActive)
+            .filter(t -> t.isActive())
             .findFirst()
             .ifPresent(t ->
             {
-                if(context.getGameField().isStopPos(t, context.getTetras()))
+                if(context.getGameField().isLost(t, context.getTetras()))
                 {
-                    t.setActive(false);
+                    context.setLost(true);
                 }
             });
     }

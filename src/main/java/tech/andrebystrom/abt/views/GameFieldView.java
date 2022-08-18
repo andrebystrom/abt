@@ -13,7 +13,7 @@ public class GameFieldView extends JPanel
 
     public GameFieldView()
     {
-        setPreferredSize(new Dimension(150, 300));
+        setPreferredSize(new Dimension(400, 800));
     }
 
     @Override
@@ -21,7 +21,7 @@ public class GameFieldView extends JPanel
     {
         super.paint(g);
         g.setColor(Color.black);
-        g.fillRect(0, 0, 149, 299);
+        g.fillRect(0, 0, 400, 800);
 
         if(state != null)
         {
@@ -30,7 +30,7 @@ public class GameFieldView extends JPanel
                 g.setColor(getColor(tetra.getClass()));
                 for(var pos : tetra.getPositions())
                 {
-                    g.fillRect(15 * pos.x(), 15 * pos.y(), 15, 15);
+                    g.fillRect(40 * pos.x(), 40 * pos.y(), 40, 40);
                 }
             }
         }

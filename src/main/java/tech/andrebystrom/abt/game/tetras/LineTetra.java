@@ -5,26 +5,22 @@ import tech.andrebystrom.abt.shared.Position;
 
 import java.util.ArrayList;
 
-public class BoxTetra extends Tetra
+public class LineTetra extends Tetra
 {
-    public BoxTetra()
+    public LineTetra()
     {
+        var middle = GameField.WIDTH / 2;
         var positions = new ArrayList<Position>();
-        int middle = GameField.WIDTH / 2;
-        for(int i = middle; i < middle + 2; i++)
+        for(int i = middle - 1; i < middle - 1 + 4; i++)
         {
             positions.add(new Position(i, 0));
-            positions.add(new Position(i, 1));
         }
         setPositions(positions);
     }
 
-    /**
-     * Undoes the rotation, for the box this does nothing.
-     */
     @Override
     public void undoRotation()
     {
-
+        rotate();
     }
 }

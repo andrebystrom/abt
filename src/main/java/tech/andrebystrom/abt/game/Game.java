@@ -1,75 +1,48 @@
 package tech.andrebystrom.abt.game;
 
-import com.sun.tools.javac.Main;
 import tech.andrebystrom.abt.game.processors.*;
 import tech.andrebystrom.abt.game.tetras.Tetra;
 import tech.andrebystrom.abt.game.tetras.TetraFactory;
+import tech.andrebystrom.abt.shared.State;
 import tech.andrebystrom.abt.views.MainWindow;
 
 import javax.swing.*;
-import java.lang.reflect.InvocationTargetException;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class Game
 {
+    private State state = State.NOT_STARTED;
     private int points;
     private int completedLinesCount;
     private List<Tetra> tetras;
     private GameField gameField;
-    private final List<Processor> processors;
+    private List<Processor> processors;
 
     private final TetraFactory tetraFactory = new TetraFactory();
 
     private final MainWindow window;
 
-    // Synchronization.
-    private boolean running;
-    private final Lock gameLoopLock = new ReentrantLock();
-
-    private final ConcurrentLinkedQueue<Input> inputQueue = new ConcurrentLinkedQueue<>();
+    private ConcurrentLinkedQueue<Input> inputQueue;
 
     public Game(MainWindow window)
     {
-        processors = List.of(
-            new SpawnProcessor(),
-            new MovementProcessor(),
-            new StoppedProcessor(),
-            new LineProcessor(),
-            new StaleTetraProcessor());
+        resetFields();
         this.window = window;
-        tetras = new ArrayList<>();
-        gameField = new GameField();
+        this.window.addKeyListener(new KeyListener());
     }
 
     public synchronized void start()
     {
-        if(running)
+        if(state != State.NOT_STARTED)
         {
-            return;
+            throw new RuntimeException("Attempt to start multiple game loops");
         }
-
-        running = true;
+        state = State.RUNNING;
         Thread t = new Thread(this::gameLoop);
         t.start();
-    }
-
-    public synchronized void pause()
-    {
-        if(!running)
-        {
-            return;
-        }
-        running = false;
-    }
-
-    public synchronized void reset()
-    {
-
     }
 
     public void submitInput(Input input)
@@ -79,42 +52,38 @@ public class Game
 
     private void gameLoop()
     {
-        gameLoopLock.lock();
-        try
+        while(true)
         {
-            while(true)
+            // We want 30 fps.
+            int msPerFrame = 1000 / 30;
+            var startTime = System.currentTimeMillis();
+
+            State currState;
+            synchronized(this)
             {
-                // Check if time to exit.
-                synchronized(this)
+                currState = state;
+            }
+            switch(currState)
+            {
+                case RUNNING -> runIteration();
+                case LOST ->
                 {
-                    if(!running)
-                    {
-                        break;
-                    }
-                }
-                // We want 60 fps.
-                int msPerFrame = 1000/30;
-                var startTime = System.currentTimeMillis();
-                // Do actual work.
-                runIteration();
-                var endTime = System.currentTimeMillis();
-                try
-                {
-                    var sleepTime = msPerFrame - (endTime - startTime);
-                    if(sleepTime >= 0)
-                    {
-                        Thread.sleep(sleepTime);
-                    }
-                }
-                catch(InterruptedException e)
-                {
-                    // ignore.
                 }
             }
-        }
-        finally
-        {
-            gameLoopLock.unlock();
+
+            var endTime = System.currentTimeMillis();
+            try
+            {
+                var sleepTime = msPerFrame - (endTime - startTime);
+                if(sleepTime >= 0)
+                {
+                    Thread.sleep(sleepTime);
+                }
+            }
+            catch(InterruptedException e)
+            {
+                // ignore.
+            }
         }
     }
 
@@ -137,6 +106,72 @@ public class Game
         catch(Exception e)
         {
             throw new RuntimeException(e);
+        }
+    }
+
+    private void resetFields()
+    {
+        processors = List.of(
+            new SpawnProcessor(),
+            new MovementProcessor(),
+            new StoppedProcessor(),
+            new LineProcessor(),
+            new StaleTetraProcessor(),
+            new LostProcessor());
+        tetras = new ArrayList<>();
+        gameField = new GameField();
+        inputQueue = new ConcurrentLinkedQueue<>();
+        points = 0;
+        completedLinesCount = 0;
+    }
+
+    private class KeyListener implements java.awt.event.KeyListener
+    {
+        @Override
+        public void keyTyped(KeyEvent e)
+        {
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e)
+        {
+            State currState;
+            synchronized(Game.this)
+            {
+                currState = state;
+            }
+            switch(state)
+            {
+                case NOT_STARTED -> start();
+                case LOST ->
+                {
+                    if(e.getKeyCode() == KeyEvent.VK_SPACE)
+                    {
+
+                    }
+                }
+                case RUNNING ->
+                {
+                    switch(e.getKeyCode())
+                    {
+                        case KeyEvent.VK_UP -> inputQueue.add(Input.UP);
+                        case KeyEvent.VK_DOWN -> inputQueue.add(Input.DOWN);
+                        case KeyEvent.VK_LEFT -> inputQueue.add(Input.LEFT);
+                        case KeyEvent.VK_RIGHT -> inputQueue.add(Input.RIGHT);
+                    }
+                }
+                case PAUSED ->
+                {
+
+                }
+            }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e)
+        {
+
         }
     }
 }

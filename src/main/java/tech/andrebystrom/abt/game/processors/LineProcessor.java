@@ -48,7 +48,9 @@ public class LineProcessor implements Processor
                 .stream()
                 .filter(t -> !t.isActive())
                 .forEach(t -> t.removePositionsAtY(completedLine));
-
+        }
+        for(var completedLine : completedLines)
+        {
             for(int i = 0; i < completedLine; i++)
             {
                 final int y = i;

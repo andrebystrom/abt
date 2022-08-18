@@ -65,26 +65,29 @@ public abstract class Tetra
         {
             throw new IllegalArgumentException("Tetra cannot have more than four positions");
         }
-        for(var position : positions)
+        if(isActive)
         {
-            boolean found = false;
-            for(var neighbor : positions)
+            for(var position : positions)
             {
-                if(position.equals(neighbor))
+                boolean found = false;
+                for(var neighbor : positions)
                 {
-                    continue;
+                    if(position.equals(neighbor))
+                    {
+                        continue;
+                    }
+                    if((Math.abs(position.x() - neighbor.x()) == 1 || position.x() - neighbor.x() == 0)
+                        && (Math.abs(position.y() - neighbor.y()) == 1) || position.y() - neighbor.y() == 0)
+                    {
+                        // Found neighbour.
+                        found = true;
+                        break;
+                    }
                 }
-                if((Math.abs(position.x() - neighbor.x()) == 1 || position.x() - neighbor.x() == 0)
-                    && (Math.abs(position.y() - neighbor.y()) == 1) || position.y() - neighbor.y() == 0)
+                if(!found)
                 {
-                    // Found neighbour.
-                    found = true;
-                    break;
+                    throw new IllegalArgumentException("Tetra has to be connected");
                 }
-            }
-            if(!found)
-            {
-                throw new IllegalArgumentException("Tetra has to be connected");
             }
         }
         this.positions.clear();
@@ -148,7 +151,24 @@ public abstract class Tetra
     /**
      * Rotates the tetra.
      */
-    public abstract void rotate();
+    public void rotate()
+    {
+        var first = getPositions().stream().findFirst().orElse(new Position(0, 0));
+        var xShift = first.x();
+        var yShift = first.y();
+        var newPositions = getPositions().stream()
+            .map(p ->
+            {
+                // Counter-clockwise rotation translated to the first position of the object.
+                // i.e. multiplication by the matrix
+                // [0 -1]
+                // [1  0]
+                // Where x is reflected along the x-axis first.
+                return new Position(xShift + (p.y() - yShift), yShift + (p.x() - xShift));
+            })
+            .collect(Collectors.toList());
+        setPositions(newPositions);
+    }
 
     /**
      * Undoes the tetra rotation.

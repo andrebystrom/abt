@@ -14,7 +14,10 @@ public class TetraFactory
 
     public TetraFactory()
     {
-        tetras = List.of(BoxTetra.class);
+        tetras = List.of(
+            BoxTetra.class,
+            LineTetra.class,
+            TTetra.class);
     }
 
     public Tetra pop()
