@@ -4,6 +4,8 @@ import tech.andrebystrom.abt.game.GameState;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class MainWindow extends JFrame
 {
@@ -26,6 +28,18 @@ public class MainWindow extends JFrame
         container.setPreferredSize(new Dimension(400, 800));
         container.add(startView);
         add(container);
+
+        addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent event)
+            {
+                if(event.isControlDown() && event.getKeyCode() == KeyEvent.VK_C)
+                {
+                    System.exit(0);
+                }
+            }
+        });
     }
 
     public void render(GameState state)
