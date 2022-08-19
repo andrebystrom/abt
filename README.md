@@ -1,6 +1,8 @@
 # ABT
 Simple Tetris like game implemented in the Java Swing framework.
 
+![Gameplay](docs/screenshots/gameplay.png)
+
 ## Overview
 The game consists of the game models "Tetra" and "GameField" which are used to model
 everything in the game. The Game class is the orchestrator which coordinates
