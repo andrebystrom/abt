@@ -1,5 +1,7 @@
 package tech.andrebystrom.abt.views;
 
+import tech.andrebystrom.abt.game.tetras.LineTetra;
+import tech.andrebystrom.abt.game.tetras.TTetra;
 import tech.andrebystrom.abt.shared.GameState;
 import tech.andrebystrom.abt.game.tetras.BoxTetra;
 import tech.andrebystrom.abt.game.tetras.Tetra;
@@ -46,6 +48,14 @@ public class GameFieldView extends JPanel
         if(tetra.equals(BoxTetra.class))
         {
             return Color.blue;
+        }
+        else if(tetra.equals(LineTetra.class))
+        {
+            return Color.yellow;
+        }
+        else if(tetra.equals(TTetra.class))
+        {
+            return Color.GREEN;
         }
         return Color.cyan;
     }

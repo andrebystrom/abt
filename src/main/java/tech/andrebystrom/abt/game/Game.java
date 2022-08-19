@@ -107,8 +107,12 @@ public class Game
         {
             processor.process(context);
         }
-        completedLinesCount += context.getCompletedLines().size();
-        points += completedLinesCount * 100;
+        var completedLinesInIteration = context.getCompletedLines().size();
+        if(completedLinesInIteration > 0)
+        {
+            completedLinesCount += completedLinesInIteration;
+            points += completedLinesInIteration * 100;
+        }
         if(context.isLost())
         {
             synchronized(this)
