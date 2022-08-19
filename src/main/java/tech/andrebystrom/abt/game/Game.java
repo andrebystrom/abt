@@ -191,11 +191,12 @@ public class Game
                         case KeyEvent.VK_DOWN -> inputQueue.add(Input.DOWN);
                         case KeyEvent.VK_LEFT -> inputQueue.add(Input.LEFT);
                         case KeyEvent.VK_RIGHT -> inputQueue.add(Input.RIGHT);
+                        // TODO: implement pause.
                     }
                 }
                 case PAUSED ->
                 {
-
+                    // TODO: implement pause.
                 }
             }
         }
