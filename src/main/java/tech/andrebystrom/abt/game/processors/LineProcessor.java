@@ -51,19 +51,15 @@ public class LineProcessor implements Processor
         }
         for(var completedLine : completedLines)
         {
-            for(int i = 0; i < completedLine; i++)
-            {
-                final int y = i;
-                context.getTetras()
-                    .stream()
-                    .filter(t ->
-                    {
-                        return t.getPositions()
-                            .stream()
-                            .anyMatch(p -> p.y() == y);
-                    })
-                    .forEach(Tetra::moveDown);
-            }
+            context.getTetras()
+                .stream()
+                .filter(t ->
+                {
+                    return t.getPositions()
+                        .stream()
+                        .anyMatch(p -> p.y() < completedLine);
+                })
+                .forEach(t -> t.moveDownPositionsAboveY(completedLine));
         }
 
         context.setCompletedLines(completedLines);

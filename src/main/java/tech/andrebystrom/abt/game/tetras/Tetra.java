@@ -149,6 +149,24 @@ public abstract class Tetra
     }
 
     /**
+     * Moves down all the positions above the given Y coordinate.
+     *
+     * @param y the Y coordinate.
+     */
+    public void moveDownPositionsAboveY(int y)
+    {
+        var newPositions = getPositions().stream()
+            .filter(p -> p.y() < y)
+            .map(p -> new Position(p.x(), p.y() + 1))
+            .collect(Collectors.toList());
+        var oldPositions = getPositions().stream()
+            .filter(p -> p.y() >= y)
+            .toList();
+        newPositions.addAll(oldPositions);
+        setPositions(newPositions);
+    }
+
+    /**
      * Rotates the tetra.
      */
     public void rotate()
