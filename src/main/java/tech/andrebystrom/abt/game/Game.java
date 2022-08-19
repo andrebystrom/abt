@@ -73,6 +73,7 @@ public class Game
                     {
                         if(restartRequested)
                         {
+                            restartRequested = false;
                             resetFields();
                             state = State.RUNNING;
                         }
