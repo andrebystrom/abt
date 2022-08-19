@@ -28,6 +28,8 @@ public class MainWindow extends JFrame
         container.setPreferredSize(new Dimension(400, 800));
         container.add(startView);
         add(container);
+        pack();
+        setLocationRelativeTo(null);
 
         addKeyListener(new KeyAdapter()
         {
