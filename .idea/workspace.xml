@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="0efc792d-fc81-4ee2-ab00-43af07d1ac67" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/tetras/BoxTetra.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/tetras/BoxTetra.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/tetras/LineTetra.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/tetras/LineTetra.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/tetras/TTetra.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/tetras/TTetra.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/tetras/Tetra.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tech/andrebystrom/abt/game/tetras/Tetra.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +89,7 @@
       <workItem from="1660811284640" duration="2947000" />
       <workItem from="1660828914259" duration="10900000" />
       <workItem from="1660845555362" duration="1526000" />
-      <workItem from="1660895700306" duration="103000" />
+      <workItem from="1660895700306" duration="905000" />
     </task>
     <servers />
   </component>

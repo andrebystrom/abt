@@ -18,13 +18,4 @@ public class BoxTetra extends Tetra
         }
         setPositions(positions);
     }
-
-    /**
-     * Undoes the rotation, for the box this does nothing.
-     */
-    @Override
-    public void undoRotation()
-    {
-
-    }
 }

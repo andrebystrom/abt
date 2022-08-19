@@ -3,7 +3,6 @@ package tech.andrebystrom.abt.game.tetras;
 import tech.andrebystrom.abt.shared.Position;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,6 +10,7 @@ public abstract class Tetra
 {
     private boolean isActive;
     private final List<Position> positions = new ArrayList<>();
+    private List<Position> prevPositions;
 
     /**
      * Returns true if the tetra is active, false otherwise.
@@ -49,7 +49,7 @@ public abstract class Tetra
      *
      * @return the positions.
      */
-    public final Collection<Position> getPositions()
+    public final List<Position> getPositions()
     {
         return new ArrayList<>(positions);
     }
@@ -59,7 +59,7 @@ public abstract class Tetra
      *
      * @param positions the positions.
      */
-    public final void setPositions(Collection<? extends Position> positions)
+    public final void setPositions(List<? extends Position> positions)
     {
         if(positions.size() > 4)
         {
@@ -153,7 +153,14 @@ public abstract class Tetra
      */
     public void rotate()
     {
-        var first = getPositions().stream().findFirst().orElse(new Position(0, 0));
+        var positions = getPositions();
+        if(positions.size() == 0)
+        {
+            return;
+        }
+        prevPositions = positions;
+
+        var first = positions.get(0);
         var xShift = first.x();
         var yShift = first.y();
         var newPositions = getPositions().stream()
@@ -163,7 +170,9 @@ public abstract class Tetra
                 // i.e. multiplication by the matrix
                 // [0 -1]
                 // [1  0]
-                // Where x is reflected along the x-axis first.
+                // Where y is reflected along the x-axis first.
+                // TODO: fix so it's possible to rotate more than 90 degrees.
+                //  Right now it rotates back at the 2nd rotation.
                 return new Position(xShift + (p.y() - yShift), yShift + (p.x() - xShift));
             })
             .collect(Collectors.toList());
@@ -173,5 +182,11 @@ public abstract class Tetra
     /**
      * Undoes the tetra rotation.
      */
-    public abstract void undoRotation();
+    public void undoRotation()
+    {
+        if(prevPositions != null)
+        {
+            setPositions(prevPositions);
+        }
+    }
 }

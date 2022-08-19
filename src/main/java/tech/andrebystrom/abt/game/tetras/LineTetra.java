@@ -17,10 +17,4 @@ public class LineTetra extends Tetra
         }
         setPositions(positions);
     }
-
-    @Override
-    public void undoRotation()
-    {
-        rotate();
-    }
 }
