@@ -3,6 +3,7 @@ package tech.andrebystrom.abt.game;
 import tech.andrebystrom.abt.game.processors.*;
 import tech.andrebystrom.abt.game.tetras.Tetra;
 import tech.andrebystrom.abt.game.tetras.TetraFactory;
+import tech.andrebystrom.abt.shared.GameState;
 import tech.andrebystrom.abt.shared.State;
 import tech.andrebystrom.abt.views.MainWindow;
 

@@ -1,6 +1,6 @@
 package tech.andrebystrom.abt.views;
 
-import tech.andrebystrom.abt.game.GameState;
+import tech.andrebystrom.abt.shared.GameState;
 
 import javax.swing.*;
 import java.awt.*;

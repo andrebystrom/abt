@@ -1,6 +1,6 @@
 package tech.andrebystrom.abt.views;
 
-import tech.andrebystrom.abt.game.GameState;
+import tech.andrebystrom.abt.shared.GameState;
 import tech.andrebystrom.abt.game.tetras.BoxTetra;
 import tech.andrebystrom.abt.game.tetras.Tetra;
 

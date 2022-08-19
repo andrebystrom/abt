@@ -1,4 +1,4 @@
-package tech.andrebystrom.abt.game;
+package tech.andrebystrom.abt.shared;
 
 import tech.andrebystrom.abt.game.tetras.Tetra;
 
