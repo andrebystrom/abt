@@ -184,14 +184,13 @@ public abstract class Tetra
         var newPositions = getPositions().stream()
             .map(p ->
             {
-                // Counter-clockwise rotation translated to the first position of the object.
+                // Clockwise rotation translated to the first position of the object.
                 // i.e. multiplication by the matrix
                 // [0 -1]
                 // [1  0]
-                // Where y is reflected along the x-axis first.
-                // TODO: fix so it's possible to rotate more than 90 degrees.
-                //  Right now it rotates back at the 2nd rotation.
-                return new Position(xShift + (p.y() - yShift), yShift + (p.x() - xShift));
+                return new Position(
+                    -(p.y() - yShift) + xShift,
+                    (p.x() - xShift) + yShift);
             })
             .collect(Collectors.toList());
         setPositions(newPositions);

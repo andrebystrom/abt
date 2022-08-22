@@ -24,5 +24,4 @@ Left arrow moves to the left, right arrow to the right. Up arrow rotates the tet
 and down arrow increases the speed.
 
 ## Known issues
-1. Rotation is not working correctly yet.
-2. Pause is not implemented.
+1. Pause is not implemented.

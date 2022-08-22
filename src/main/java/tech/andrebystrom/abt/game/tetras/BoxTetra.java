@@ -18,4 +18,16 @@ public class BoxTetra extends Tetra
         }
         setPositions(positions);
     }
+
+    @Override
+    public void rotate()
+    {
+        // Do nothing as we don't want the box to the able to rotate.
+    }
+
+    @Override
+    public void undoRotation()
+    {
+        // Same as for rotate.
+    }
 }
