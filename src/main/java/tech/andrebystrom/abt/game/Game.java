@@ -142,8 +142,8 @@ public class Game
     {
         processors = List.of(
             new SpawnProcessor(),
-            new MovementProcessor(),
             new StoppedProcessor(),
+            new MovementProcessor(),
             new LineProcessor(),
             new StaleTetraProcessor(),
             new LostProcessor());
