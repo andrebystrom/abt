@@ -17,6 +17,9 @@ public class Game
 {
     private State state = State.NOT_STARTED;
     private boolean restartRequested;
+
+    private boolean pauseRequested;
+    private boolean unpauseRequested;
     private int points;
     private int completedLinesCount;
     private List<Tetra> tetras;
@@ -80,6 +83,17 @@ public class Game
                         }
                     }
                 }
+                case PAUSED ->
+                {
+                    synchronized(this)
+                    {
+                        if(unpauseRequested)
+                        {
+                            unpauseRequested = false;
+                            state = State.RUNNING;
+                        }
+                    }
+                }
             }
 
             var endTime = System.currentTimeMillis();
@@ -112,6 +126,14 @@ public class Game
         {
             completedLinesCount += completedLinesInIteration;
             points += completedLinesInIteration * 100;
+        }
+        synchronized(this)
+        {
+            if(pauseRequested)
+            {
+                pauseRequested = false;
+                state = State.PAUSED;
+            }
         }
         if(context.isLost())
         {
@@ -170,7 +192,7 @@ public class Game
             {
                 currState = state;
             }
-            switch(state)
+            switch(currState)
             {
                 case NOT_STARTED -> start();
                 case LOST ->
@@ -191,12 +213,24 @@ public class Game
                         case KeyEvent.VK_DOWN -> inputQueue.add(Input.DOWN);
                         case KeyEvent.VK_LEFT -> inputQueue.add(Input.LEFT);
                         case KeyEvent.VK_RIGHT -> inputQueue.add(Input.RIGHT);
-                        // TODO: implement pause.
+                        case KeyEvent.VK_P ->
+                        {
+                            synchronized(Game.this)
+                            {
+                                pauseRequested = true;
+                            }
+                        }
                     }
                 }
                 case PAUSED ->
                 {
-                    // TODO: implement pause.
+                    if(e.getKeyCode() == KeyEvent.VK_P)
+                    {
+                        synchronized(Game.this)
+                        {
+                            unpauseRequested = true;
+                        }
+                    }
                 }
             }
         }
