@@ -22,6 +22,3 @@ The project is built in Java 17.
 
 Left arrow moves to the left, right arrow to the right. Up arrow rotates the tetra
 and down arrow increases the speed.
-
-## Known issues
-1. Pause is not implemented.
